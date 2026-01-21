@@ -299,11 +299,6 @@ export function useSettings() {
     setCloudReasoningBaseUrl,
     setUseReasoningModel,
     setReasoningModel,
-    setReasoningProvider: (provider: string) => {
-      if (provider !== "custom") {
-        setReasoningModel("");
-      }
-    },
     setOpenaiApiKey,
     setAnthropicApiKey,
     setGeminiApiKey,

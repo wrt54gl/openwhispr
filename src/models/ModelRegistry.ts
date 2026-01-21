@@ -263,6 +263,26 @@ export function getTranscriptionModels(providerId: string): TranscriptionModelDe
   return provider?.models || [];
 }
 
+// Provider configuration for UI components
+export interface ProviderConfig {
+  label: string;
+  apiKeyStorageKey?: string;
+  baseStorageKey?: string;
+}
+
+export const PROVIDER_CONFIG: Record<string, ProviderConfig> = {
+  openai: { label: "OpenAI", apiKeyStorageKey: "openaiApiKey" },
+  anthropic: { label: "Anthropic", apiKeyStorageKey: "anthropicApiKey" },
+  gemini: { label: "Gemini", apiKeyStorageKey: "geminiApiKey" },
+  groq: { label: "Groq", apiKeyStorageKey: "groqApiKey" },
+  custom: {
+    label: "Custom endpoint",
+    apiKeyStorageKey: "openaiApiKey",
+    baseStorageKey: "cloudReasoningBaseUrl",
+  },
+  local: { label: "Local" },
+};
+
 export function getDefaultTranscriptionModel(providerId: string): string {
   const models = getTranscriptionModels(providerId);
   return models[0]?.id || "gpt-4o-mini-transcribe";

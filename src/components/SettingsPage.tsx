@@ -74,7 +74,6 @@ export default function SettingsPage({ activeSection = "general" }: SettingsPage
     setCloudReasoningBaseUrl,
     setUseReasoningModel,
     setReasoningModel,
-    setReasoningProvider,
     setOpenaiApiKey,
     setAnthropicApiKey,
     setGeminiApiKey,

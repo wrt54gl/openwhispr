@@ -18,29 +18,11 @@ import { AlertDialog } from "./dialog";
 import { useDialogs } from "../../hooks/useDialogs";
 import { useAgentName } from "../../utils/agentName";
 import ReasoningService, { DEFAULT_PROMPTS } from "../../services/ReasoningService";
-import { getModelProvider } from "../../models/ModelRegistry";
+import { getModelProvider, PROVIDER_CONFIG } from "../../models/ModelRegistry";
 
 interface PromptStudioProps {
   className?: string;
 }
-
-type ProviderConfig = {
-  label: string;
-  apiKeyStorageKey?: string;
-  baseStorageKey?: string;
-};
-
-const PROVIDER_CONFIG: Record<string, ProviderConfig> = {
-  openai: { label: "OpenAI", apiKeyStorageKey: "openaiApiKey" },
-  anthropic: { label: "Anthropic", apiKeyStorageKey: "anthropicApiKey" },
-  gemini: { label: "Gemini", apiKeyStorageKey: "geminiApiKey" },
-  custom: {
-    label: "Custom endpoint",
-    apiKeyStorageKey: "openaiApiKey",
-    baseStorageKey: "cloudReasoningBaseUrl",
-  },
-  local: { label: "Local" },
-};
 
 export default function PromptStudio({ className = "" }: PromptStudioProps) {
   const [activeTab, setActiveTab] = useState<"current" | "edit" | "test">("current");
