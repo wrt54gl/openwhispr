@@ -125,9 +125,9 @@ export default function SettingsPage({ activeSection = "general" }: SettingsPage
     showAlert: showAlertDialog,
   });
 
-  const [localReasoningProvider, setLocalReasoningProvider] = useState(() => {
-    return localStorage.getItem("reasoningProvider") || reasoningProvider;
-  });
+  // reasoningProvider is derived from reasoningModel via getModelProvider() in useSettings
+  // No need for localStorage or local state - it's computed automatically
+  const [localReasoningProvider, setLocalReasoningProvider] = useState(reasoningProvider);
 
   useEffect(() => {
     let mounted = true;

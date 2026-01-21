@@ -2,6 +2,7 @@ import ReasoningService from "../services/ReasoningService";
 import { API_ENDPOINTS, buildApiUrl, normalizeBaseUrl } from "../config/constants";
 import logger from "../utils/logger";
 import { isBuiltInMicrophone } from "../utils/audioDeviceUtils";
+import { getModelProvider } from "../models/ModelRegistry";
 
 const SHORT_CLIP_DURATION_SECONDS = 2.5;
 const REASONING_CACHE_TTL = 30000; // 30 seconds
@@ -552,10 +553,8 @@ class AudioManager {
       typeof window !== "undefined" && window.localStorage
         ? localStorage.getItem("reasoningModel") || ""
         : "";
-    const reasoningProvider =
-      typeof window !== "undefined" && window.localStorage
-        ? localStorage.getItem("reasoningProvider") || "auto"
-        : "auto";
+    // Derive provider from model name instead of reading from localStorage
+    const reasoningProvider = reasoningModel ? getModelProvider(reasoningModel) : "auto";
     const agentName =
       typeof window !== "undefined" && window.localStorage
         ? localStorage.getItem("agentName") || null
