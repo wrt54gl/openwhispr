@@ -245,7 +245,7 @@ export function getModelProvider(modelId: string): string {
       return "local";
   }
 
-  return model?.provider || "openai";
+  return model?.provider || "";
 }
 
 export function getTranscriptionProviders(): TranscriptionProviderData[] {

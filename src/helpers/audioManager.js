@@ -554,7 +554,7 @@ class AudioManager {
         ? localStorage.getItem("reasoningModel") || ""
         : "";
     // Derive provider from model name instead of reading from localStorage
-    const reasoningProvider = reasoningModel ? getModelProvider(reasoningModel) : "auto";
+    const reasoningProvider = reasoningModel ? getModelProvider(reasoningModel) : "";
     const agentName =
       typeof window !== "undefined" && window.localStorage
         ? localStorage.getItem("agentName") || null

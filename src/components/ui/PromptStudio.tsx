@@ -85,8 +85,6 @@ export default function PromptStudio({ className = "" }: PromptStudioProps) {
       // Check if reasoning model is enabled and if we have the necessary settings
       const useReasoningModel = localStorage.getItem("useReasoningModel") === "true";
       const reasoningModel = localStorage.getItem("reasoningModel") || "";
-      // Determine provider from the model name, falling back to openai if needed
-      const reasoningProvider = reasoningModel ? getModelProvider(reasoningModel) : "openai";
 
       if (!useReasoningModel) {
         setTestResult(
@@ -99,6 +97,8 @@ export default function PromptStudio({ className = "" }: PromptStudioProps) {
         setTestResult("⚠️ No reasoning model selected. Choose one in AI Models settings.");
         return;
       }
+
+      const reasoningProvider = getModelProvider(reasoningModel);
 
       const providerConfig = PROVIDER_CONFIG[reasoningProvider] || {
         label: reasoningProvider.charAt(0).toUpperCase() + reasoningProvider.slice(1),
@@ -303,7 +303,7 @@ export default function PromptStudio({ className = "" }: PromptStudioProps) {
   const renderTestPlayground = () => {
     const useReasoningModel = localStorage.getItem("useReasoningModel") === "true";
     const reasoningModel = localStorage.getItem("reasoningModel") || "";
-    const reasoningProvider = reasoningModel ? getModelProvider(reasoningModel) : "openai";
+    const reasoningProvider = reasoningModel ? getModelProvider(reasoningModel) : "";
     const providerConfig = PROVIDER_CONFIG[reasoningProvider] || {
       label: reasoningProvider.charAt(0).toUpperCase() + reasoningProvider.slice(1),
     };
